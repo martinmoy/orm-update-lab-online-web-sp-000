@@ -57,6 +57,11 @@ class Student
     self.new(id, name, grade)
   end
 
+  def self.find_by_name(name)
+    sql = "SELECT * FROM students WHERE name = ?"
+    DB[:conn].execute(sql, name).map { |row| new_from_db(row) }.first
+  end
+
   # Remember, you can access your database connection anywhere in this class
   #  with DB[:conn]
 
